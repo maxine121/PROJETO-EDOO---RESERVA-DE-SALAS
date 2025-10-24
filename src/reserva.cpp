@@ -4,8 +4,8 @@
 
 #include "../headers/reserva.h"
 
-Reserva::Reserva(const int id, const std::string &data, const std::string &horario, const std::string &reservadoPor)
-    : salaId(id), ReservadoPor(reservadoPor), Data(data), Horario(horario) {}
+Reserva::Reserva(const int id, const std::string &data, const std::string &horario, const std::string &reservadoPor, const int duracao)
+    : salaId(id), ReservadoPor(reservadoPor), Data(data), Horario(horario), Duracao(duracao) {}
     int Reserva::getId() const {
     return salaId;
 }
@@ -18,6 +18,9 @@ Reserva::Reserva(const int id, const std::string &data, const std::string &horar
     std::string Reserva::getReservadoPor() const {
         return ReservadoPor;
     }
+    int  Reserva::getDuracao() const {
+        return Duracao;
+    }
     void Reserva::setId(const int id) {
         salaId = id;
     }
@@ -29,4 +32,7 @@ Reserva::Reserva(const int id, const std::string &data, const std::string &horar
     }
     void Reserva::setReservadoPor(const std::string &reservadoPor) {
         ReservadoPor = reservadoPor;
+    }
+    void Reserva::setDuracao(const int duracao) {
+        Duracao = duracao;
     }

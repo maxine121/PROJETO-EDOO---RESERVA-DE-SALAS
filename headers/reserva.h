@@ -13,16 +13,22 @@ private:
     std::string ReservadoPor;
     std::string Data;
     std::string Horario;
+    int Duracao;
+
+
+
     public:
-    Reserva(int id, const std::string &data, const std::string &horario, const std::string &reservadoPor); //Construtor
+    Reserva(int id, const std::string &data, const std::string &horario, const std::string &reservadoPor, int duracao); //Construtor
     [[nodiscard]] int getId() const;
     [[nodiscard]] std::string getData() const;
     [[nodiscard]] std::string getHorario() const;
     [[nodiscard]] std::string getReservadoPor() const;
+    [[nodiscard]] int getDuracao() const;
     void setId(int id);
     void setData(const std::string &data);
     void setHorario(const std::string &horario);
     void setReservadoPor(const std::string &reservadoPor);
+    void setDuracao(int duracao);
 };
 
 

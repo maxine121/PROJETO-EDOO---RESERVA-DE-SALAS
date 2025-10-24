@@ -31,7 +31,9 @@ void AdmSalas::listarReservas() const {
         std::cout << "Sala " << res.getId()
                   << " reservada por " << res.getReservadoPor()
                   << " para " << res.getData()
-                  << " de " << res.getHorario() << "\n";
+                  << " de " << res.getHorario() << ":00 "
+                  << " por " << res.getDuracao() << " horas"
+        <<"\n";
     }
 }
 bool AdmSalas::cancelarReserva(int salaId, const std::string& data, const std::string& horario) {
@@ -51,7 +53,8 @@ void AdmSalas::salvarNoArquivo(const std::string& filename) const {
         out << res.getId() << "|"
             << res.getData() << "|"
             << res.getHorario() << "|"
-            << res.getReservadoPor() << "\n";
+            << res.getReservadoPor() <<"|"
+            << res.getDuracao() << "\n";
     }
     out.close();
 }
@@ -60,15 +63,18 @@ void AdmSalas::carregarDoArquivo(const std::string& filename) {
     std::string line;
     while (std::getline(in, line)) {
         std::stringstream ss(line);
-        std::string idStr, data, horario, reservadoPor;
+        std::string idStr, data, horario, reservadoPor, reservadoDuracao;
 
         std::getline(ss, idStr, '|');
         std::getline(ss, data, '|');
         std::getline(ss, horario, '|');
         std::getline(ss, reservadoPor, '|');
+        std::getline(ss, reservadoDuracao, '|');
+
 
         int id = std::stoi(idStr);
-        reservas.push_back(Reserva(id, data, horario, reservadoPor));
+        int duracao = std::stoi(reservadoDuracao);
+        reservas.push_back(Reserva(id, data, horario, reservadoPor, duracao));
     }
     in.close();
 }

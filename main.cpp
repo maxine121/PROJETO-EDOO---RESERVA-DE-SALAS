@@ -22,7 +22,8 @@ int main() {
         // Handle each option below
         switch (escolha) {
             case 1: {
-                int id;
+                int id , duracao;
+
                 std::string data, horario, reservadoPor;
 
                 std::cout << "Digite o id da sala: ";
@@ -31,15 +32,18 @@ int main() {
                 std::cout << "Digite a data quando deseja reservar (Ano-Mes-Dia): ";
                 std::cin >> data;
 
-                std::cout << "Digite o horario de inicio de reserva (ex.: 14:00): ";
+                std::cout << "Digite o horario de inicio de reserva (ex.: 14): ";
                 std::cin >> horario;
+
+                std::cout << "digite por quantas horas (ex.: 2): ";
+                std::cin >> duracao;
 
                 std::cin.ignore();
                 std::cout << "Digite seu nome: ";
                 std::getline(std::cin, reservadoPor);
 
 
-                Reserva r(id, data, horario, reservadoPor); // Instancia um obj da classe Reserva.
+                Reserva r(id, data, horario, reservadoPor, duracao); // Instancia um obj da classe Reserva.
 
 
                 if (adm.addReserva(r)) { //Tenta adicioná-lo ao vetor reservas caso não seja igual a outro.

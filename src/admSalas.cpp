@@ -2,7 +2,7 @@
 // Created by italo on 20/10/2025.
 //
 
-#include "admSalas.h"
+#include "../headers/admSalas.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -25,6 +25,8 @@ bool AdmSalas::isDisponivel(int salaId, const std::string& data, const std::stri
     return true;
 }
 void AdmSalas::listarReservas() const {
+    if (reservas.empty()) {
+        std::cout << "Nao existem reservas no momento" << std::endl;}
     for (const auto& res : reservas) {
         std::cout << "Sala " << res.getId()
                   << " reservada por " << res.getReservadoPor()

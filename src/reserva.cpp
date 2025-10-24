@@ -2,7 +2,7 @@
 // Created by italo on 19/10/2025.
 //
 
-#include "reserva.h"
+#include "../headers/reserva.h"
 
 Reserva::Reserva(const int id, const std::string &data, const std::string &horario, const std::string &reservadoPor)
     : salaId(id), ReservadoPor(reservadoPor), Data(data), Horario(horario) {}

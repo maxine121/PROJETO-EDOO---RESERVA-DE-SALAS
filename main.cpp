@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
-#include "reserva.h"
-#include "admSalas.h"
+#include "headers/reserva.h"
+#include "headers/admSalas.h"
 
 int main() {
-    std::cout << "Ola e bem vindo(a) ao sistema de reservas de salas do CIN" << std::endl;
-    AdmSalas adm;
+    AdmSalas adm; //Instancia um objeto da classe AdmSalas com todos os métodos necessários para administrar salas e reservas.
     adm.carregarSalasDeArquivo("salas.txt");
     adm.carregarDoArquivo("reservas.txt");
     int escolha;
@@ -35,15 +34,15 @@ int main() {
                 std::cout << "Digite o horario de inicio de reserva (ex.: 14:00): ";
                 std::cin >> horario;
 
-                std::cin.ignore(); // Clear leftover newline
+                std::cin.ignore();
                 std::cout << "Digite seu nome: ";
                 std::getline(std::cin, reservadoPor);
 
-                // Create reservation object
-                Reserva r(id, data, horario, reservadoPor);
 
-                // Try to add it
-                if (adm.addReserva(r)) {
+                Reserva r(id, data, horario, reservadoPor); // Instancia um obj da classe Reserva.
+
+
+                if (adm.addReserva(r)) { //Tenta adicioná-lo ao vetor reservas caso não seja igual a outro.
                     std::cout << "Reserva adicionada com sucesso.\n";
                 }
             }
@@ -71,7 +70,7 @@ int main() {
                 }
             }
                 break;
-            case 4:
+            case 4: //Assim que o usuário sai do sistema, ele salva o estado do vetor reservas em reservas.txt.
                 adm.salvarNoArquivo("reservas.txt");
                 std::cout << "Saindo e salvando...\n";
                 break;

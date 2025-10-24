@@ -4,9 +4,9 @@ project(PROJETO-EDOO---RESERVA-DE-SALAS)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(PROJETO-EDOO---RESERVA-DE-SALAS main.cpp
-        sala.cpp
-        sala.h
-        reserva.cpp
-        reserva.h
-        admSalas.cpp
-        admSalas.h)
+        src/sala.cpp
+        headers/sala.h
+        src/reserva.cpp
+        headers/reserva.h
+        src/admSalas.cpp
+        headers/admSalas.h)

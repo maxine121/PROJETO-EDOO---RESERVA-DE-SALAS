@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 4.0)
-project(tutoras)
+project(PROJETO-EDOO---RESERVA-DE-SALAS)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(tutoras main.cpp
+add_executable(PROJETO-EDOO---RESERVA-DE-SALAS main.cpp
         sala.cpp
         sala.h
         reserva.cpp

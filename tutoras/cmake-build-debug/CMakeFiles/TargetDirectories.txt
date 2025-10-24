@@ -1,3 +1,0 @@
-C:/Users/italo/CLionProjects/tutoras/cmake-build-debug/CMakeFiles/tutoras.dir
-C:/Users/italo/CLionProjects/tutoras/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/italo/CLionProjects/tutoras/cmake-build-debug/CMakeFiles/rebuild_cache.dir

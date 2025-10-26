@@ -2,12 +2,94 @@
 #include <string>
 #include "headers/reserva.h"
 #include "headers/admSalas.h"
+#include "headers/admUsuario.h"
+#include "headers/comumUsuario.h"
 
 int main() {
     AdmSalas adm; //Instancia um objeto da classe AdmSalas com todos os métodos necessários para administrar salas e reservas.
+    ComumUsuario pre_uc("","","");
+    AdmUsuario pre_ua("","","");
+
+
     adm.carregarSalasDeArquivo("salas.txt");
     adm.carregarDoArquivo("reservas.txt");
+    pre_ua.carregarUsuariosAdms("usuarios_adms.txt");
+    pre_uc.carregarUsuariosComuns("usuarios_comuns.txt");
     int escolha;
+    escolha_invalida:
+    do {
+        std::cout << "\n--- Sistema de Reservas do CIN ---\n"
+        << "Boas vindas, o que deseja fazer?\n"
+        << "1. Criar Usuario comum\n"
+        << "2. Entrar como usuario comum\n"
+        << "3. Entrar como administrador\n"
+        << "4. Sair\n"
+        << "Digite sua escolha: ";
+        std::cin >> escolha;
+
+        switch (escolha) {
+            case 1: {
+                std::string nome, senha, cpf;
+                std::cout << "Insira o nome do usuario: ";
+                std::cin >> nome;
+                std::cout << std::endl << "Insira a senha: ";
+                std::cin >> senha;
+                std::cout << std::endl << "Insira o cpf: ";
+                std::cin >> cpf;
+                std::cout << std::endl;
+
+                if (pre_uc.cpfRepetido(cpf)) {
+                    std::cout << "Esse cpf ja esta cadastrado a outra conta." << std::endl;
+                    goto escolha_invalida;
+                }
+                if (!pre_uc.login(nome, senha, cpf)) {
+                    ComumUsuario u(nome, senha, cpf);
+                    u.addUsuario(u);
+                    u.salvarUsuariosComuns("usuarios_comuns.txt");
+                    std::cout << "Usuario adicionado com sucesso" << std::endl;
+                }
+
+            } break;
+            case 2: {
+                std::string nome, senha, cpf;
+                std::cout << "Insira o nome do usuario: ";
+                std::cin >> nome;
+                std::cout << std::endl << "Insira a senha: ";
+                std::cin >> senha;
+                std::cout << std::endl << "Insira a cpf: ";
+                std::cin >> cpf;
+                std::cout << std::endl;
+                if (pre_uc.login(nome, senha, cpf)) {
+                    ComumUsuario u(nome, senha, cpf);
+                    u.addUsuario(u);
+                } else {
+                    std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
+                    goto escolha_invalida;
+                }
+
+            }break;
+            case 3: {
+                std::string nome, senha, cpf;
+                std::cout << "Insira o nome do usuario: ";
+                std::cin >> nome;
+                std::cout << std::endl << "Insira a senha: ";
+                std::cin >> senha;
+                std::cout << std::endl << "Insira a cpf: ";
+                std::cin >> cpf;
+                std::cout << std::endl;
+                if (pre_ua.login(nome, senha, cpf)) {
+                    AdmUsuario u(nome, senha, cpf);
+                    u.addUsuario(u);
+                }
+            }break;
+            case 4: {
+                    return 0;
+                }
+                default:
+                std::cout << "Escolha invalida, tente outra vez.\n";
+            }
+        }   while (escolha != 1 && escolha != 2 && escolha != 3);
+
     do {
         std::cout << "\n--- Sistema de Reservas do CIN ---\n";
         std::cout << "Essas sao as salas atualmente disponiveis:\n";
@@ -19,10 +101,9 @@ int main() {
         std::cout << "Digite sua escolha: ";
         std::cin >> escolha;
 
-        // Handle each option below
         switch (escolha) {
             case 1: {
-                int id , duracao;
+                int id, duracao;
 
                 std::string data, horario, reservadoPor;
 

@@ -2,8 +2,8 @@
 // Created by italo on 20/10/2025.
 //
 
-#ifndef EDOO_ADMSALAS_H
-#define EDOO_ADMSALAS_H
+#ifndef PROJETO_EDOO_RESERVA_DE_SALAS_ADMSALAS_H
+#define PROJETO_EDOO_RESERVA_DE_SALAS_ADMSALAS_H
 #include <vector>
 
 #include "reserva.h"
@@ -27,4 +27,4 @@ private:
 };
 
 
-#endif //EDOO_ADMSALAS_H
+#endif //PROJETO_EDOO_RESERVA_DE_SALAS_ADMSALAS_H

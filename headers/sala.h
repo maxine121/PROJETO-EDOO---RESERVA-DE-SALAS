@@ -2,8 +2,8 @@
 // Created by italo on 19/10/2025.
 //
 
-#ifndef EDOO_SALA_H
-#define EDOO_SALA_H
+#ifndef PROJETO_EDOO_RESERVA_DE_SALAS_SALA_H
+#define PROJETO_EDOO_RESERVA_DE_SALAS_SALA_H
 #include <string>
 
 
@@ -18,4 +18,4 @@ public:
     std::string getNome() const;
 };
 
-#endif //EDOO_SALA_H
+#endif //PROJETO_EDOO_RESERVA_DE_SALAS_SALA_H

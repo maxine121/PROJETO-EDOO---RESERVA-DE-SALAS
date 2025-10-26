@@ -9,4 +9,10 @@ add_executable(PROJETO-EDOO---RESERVA-DE-SALAS main.cpp
         src/reserva.cpp
         headers/reserva.h
         src/admSalas.cpp
-        headers/admSalas.h)
+        headers/admSalas.h
+        src/usuario.cpp
+        headers/usuario.h
+        src/admUsuario.cpp
+        headers/admUsuario.h
+        src/comumUsuario.cpp
+        headers/comumUsuario.h)

@@ -64,4 +64,6 @@ bool ComumUsuario::cpfRepetido(const std::string& cpf) {
     }
     return false;
 }
-
+int ComumUsuario::getAcessoNivel() const {
+    return acessoNivel;
+}

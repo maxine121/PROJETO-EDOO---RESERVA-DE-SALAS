@@ -16,6 +16,7 @@ int main() {
     pre_ua.carregarUsuariosAdms("usuarios_adms.txt");
     pre_uc.carregarUsuariosComuns("usuarios_comuns.txt");
     int escolha;
+    int acesso;
     escolha_invalida:
     do {
         std::cout << "\n--- Sistema de Reservas do CIN ---\n"
@@ -44,8 +45,10 @@ int main() {
                 }
                 if (!pre_uc.login(nome, senha, cpf)) {
                     ComumUsuario u(nome, senha, cpf);
+                    acesso = u.getAcessoNivel();
                     u.addUsuario(u);
                     u.salvarUsuariosComuns("usuarios_comuns.txt");
+
                     std::cout << "Usuario adicionado com sucesso" << std::endl;
                 }
 
@@ -61,6 +64,7 @@ int main() {
                 std::cout << std::endl;
                 if (pre_uc.login(nome, senha, cpf)) {
                     ComumUsuario u(nome, senha, cpf);
+                    acesso = u.getAcessoNivel();
                     u.addUsuario(u);
                 } else {
                     std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
@@ -79,7 +83,7 @@ int main() {
                 std::cout << std::endl;
                 if (pre_ua.login(nome, senha, cpf)) {
                     AdmUsuario u(nome, senha, cpf);
-                    u.addUsuario(u);
+                    acesso = u.getAcessoNivel();
                 }
             }break;
             case 4: {
@@ -135,25 +139,32 @@ int main() {
             case 2:
                 adm.listarReservas();
                 break;
-            case 3:{
-                int id;
-                std::string data, horario;
+            case 3: {
+                if (acesso == 2) {
 
-                std::cout << "Digite o id da sala da qual deseja cancelar a reserva: ";
-                std::cin >> id;
+                    int id;
+                    std::string data, horario;
 
-                std::cout << "Digite a data para qual esta reservada: ";
-                std::cin >> data;
+                    std::cout << "Digite o id da sala da qual deseja cancelar a reserva: ";
+                    std::cin >> id;
 
-                std::cout << "Digite o horario de inicio para qual esta reservada: ";
-                std::cin >> horario;
+                    std::cout << "Digite a data para qual esta reservada: ";
+                    std::cin >> data;
 
-                if (adm.cancelarReserva(id, data, horario)) {
-                    std::cout << "Reserva cancelada.\n";
-                } else {
-                    std::cout << "Sala ou horario não encontrado(s).\n";
+                    std::cout << "Digite o horario de inicio para qual esta reservada: ";
+                    std::cin >> horario;
+
+                    if (adm.cancelarReserva(id, data, horario)) {
+                        std::cout << "Reserva cancelada.\n";
+                    } else {
+                        std::cout << "Sala ou horario não encontrado(s).\n";
+                    }
+                }
+                else {
+                    std::cout<<"Acesso negado" << std::endl;
                 }
             }
+
                 break;
             case 4: //Assim que o usuário sai do sistema, ele salva o estado do vetor reservas em reservas.txt.
                 adm.salvarNoArquivo("reservas.txt");

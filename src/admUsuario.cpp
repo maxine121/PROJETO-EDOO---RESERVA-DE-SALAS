@@ -52,3 +52,6 @@ bool AdmUsuario::cpfRepetido(const std::string& cpf) {
     }
     return false;
 }
+int AdmUsuario::getAcessoNivel() const {
+    return acessoNivel;
+}

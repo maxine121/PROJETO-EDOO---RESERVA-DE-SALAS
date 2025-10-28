@@ -20,6 +20,7 @@ public:
     void salvarUsuariosComuns(const std::string& filename) const;
     bool nomeExiste(const std::string& nome);
     bool cpfRepetido(const std::string& cpf);
+    int getAcessoNivel() const;
 };
 
 #endif //PROJETO_EDOO_RESERVA_DE_SALAS_COMUMUSUARIO_H

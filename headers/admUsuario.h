@@ -19,6 +19,7 @@ public:
     void carregarUsuariosAdms(const std::string& filename);
     bool nomeExiste(const std::string& nome);
     bool cpfRepetido(const std::string& cpf);
+    int getAcessoNivel() const;
 };
 
 

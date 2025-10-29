@@ -1,9 +1,19 @@
 #include <iostream>
 #include <string>
+#include <cstdlib> //lib para limpar tela
 #include "headers/reserva.h"
 #include "headers/admSalas.h"
 #include "headers/admUsuario.h"
 #include "headers/comumUsuario.h"
+
+void limparTela() {
+#ifdef _WIN32
+    system("cls");
+#else
+    // Assume sistemas POSIX (Linux, macOS)
+    system("clear");
+#endif
+}
 
 int main() {
     AdmSalas adm; //Instancia um objeto da classe AdmSalas com todos os métodos necessários para administrar salas e reservas.
@@ -19,6 +29,7 @@ int main() {
     int acesso;
     escolha_invalida:
     do {
+        limparTela();
         std::cout << "\n--- Sistema de Reservas do CIN ---\n"
         << "Boas vindas, o que deseja fazer?\n"
         << "1. Criar Usuario comum\n"
@@ -95,6 +106,7 @@ int main() {
         }   while (escolha != 1 && escolha != 2 && escolha != 3);
 
     do {
+        limparTela();
         std::cout << "\n--- Sistema de Reservas do CIN ---\n";
         std::cout << "Essas sao as salas atualmente disponiveis:\n";
         adm.listarSalas();
@@ -168,6 +180,7 @@ int main() {
                 break;
             case 4: //Assim que o usuário sai do sistema, ele salva o estado do vetor reservas em reservas.txt.
                 adm.salvarNoArquivo("reservas.txt");
+                limparTela();
                 std::cout << "Saindo e salvando...\n";
                 break;
             default:

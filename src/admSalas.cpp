@@ -111,3 +111,12 @@ void AdmSalas::carregarSalasDeArquivo(const std::string& filename) {
     }
     in.close();
 }
+
+void AdmSalas::salvarSalasEmArquivo(const std::string& filename) const {
+    std::ofstream out(filename);
+    for (const auto& s : salas) {
+        out << s.getId() << "|"
+            << s.getNome() << "\n";
+    }
+    out.close();
+}

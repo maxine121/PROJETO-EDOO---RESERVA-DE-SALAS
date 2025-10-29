@@ -113,7 +113,8 @@ int main() {
         std::cout << "1. Adicionar reserva\n";
         std::cout << "2. Listar reservas atuais\n";
         std::cout << "3. Cancelar Reserva\n";
-        std::cout << "4. Sair e salvar\n";
+        std::cout << "4. Adicionar nova sala (Admin)\n"; 
+        std::cout << "5. Sair e salvar\n";
         std::cout << "Digite sua escolha: ";
         std::cin >> escolha;
 
@@ -176,16 +177,37 @@ int main() {
                     std::cout<<"Acesso negado" << std::endl;
                 }
             }
+            case 4: {
+                if (acesso == 2){
+                    int id;
+                    std::string nome;
 
+                    std::cout << "Digite o ID da nova sala: ";
+                    std::cin >> id;
+
+                    if (adm.salaExiste(id)){
+                        std::cout << "Erro: Ja existe uma sala com este ID.\n";
+                    }else{
+                        std::cin.ignore(); //limpa o buffer
+                        std::cout << "Digite o numero da nova sala: ";
+                        std::getline(std::cin, nome);
+
+                        Sala novaSala(id, nome);
+                        adm.addSala(novaSala);
+                        std::cout << "Sala adicionada com sucesso. \n";
+                    }
+                }
+            }
                 break;
-            case 4: //Assim que o usuário sai do sistema, ele salva o estado do vetor reservas em reservas.txt.
+            case 5: //Assim que o usuário sai do sistema, ele salva o estado do vetor reservas em reservas.txt.
                 adm.salvarNoArquivo("reservas.txt");
+                adm.salvarSalasEmArquivo("salas.txt");
                 limparTela();
                 std::cout << "Saindo e salvando...\n";
                 break;
             default:
                 std::cout << "Escolha invalida, tente outra vez.\n";
         }
-    } while (escolha != 4);
+    } while (escolha != 5);
     return 0;
 }

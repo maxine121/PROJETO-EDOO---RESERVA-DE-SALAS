@@ -24,6 +24,7 @@ private:
     void listarSalas() const;
     bool salaExiste(int id) const;
     void carregarSalasDeArquivo(const std::string& filename);
+    void salvarSalasEmArquivo(const std::string& filename) const;
 };
 
 

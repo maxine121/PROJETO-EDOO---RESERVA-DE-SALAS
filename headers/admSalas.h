@@ -15,7 +15,7 @@ private:
     std::vector<Reserva> reservas;
     public:
     bool addReserva(const Reserva& r);
-    bool isDisponivel(int salaId, const std::string& data, const std::string& horario) const;
+    bool isDisponivel(int salaId, const std::string& data, const std::string& horario, int duracao) const;
     void listarReservas() const;
     bool cancelarReserva(int salaId, const std::string& data, const std::string& horario);
     void salvarNoArquivo(const std::string& filename) const;

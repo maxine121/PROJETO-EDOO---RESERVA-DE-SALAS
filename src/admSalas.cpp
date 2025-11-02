@@ -7,22 +7,54 @@
 #include <sstream>
 #include <iostream>
 bool AdmSalas::addReserva(const Reserva& r) {
-    if (salaExiste(r.getId()) && isDisponivel(r.getId(), r.getData(), r.getHorario())) {
+    if (salaExiste(r.getId()) && isDisponivel(r.getId(), r.getData(), r.getHorario(), r.getDuracao())) {
         reservas.push_back(r);
         return true;
     }
     std::cout << "Sala nao encontrada ou horario/data nao informados corretamente.\n";
     return false;
 }
-bool AdmSalas::isDisponivel(int salaId, const std::string& data, const std::string& horario) const {
-    for (const auto& res : reservas) {
-        if (res.getId() == salaId &&
-            res.getData() == data &&
-            res.getHorario() == horario) {
-            return false;
-            }
+bool AdmSalas::isDisponivel(int salaId, const std::string& data, const std::string& horario, int duracao) const {
+    int novo_inicio;
+    try {
+        //tenta converter o novo horário para um número
+        novo_inicio = std::stoi(horario);
+    } catch (...) {
+        //se 'horario' for algo como "14h" ou "abc", std::stoi falha
+        std::cout << "Erro: formato de horario invalido. Use apenas numeros (ex: 14)." << std::endl;
+        return false; //n eh um número
     }
-    return true;
+    
+    //calcula o período da nova reserva
+    int novo_fim = novo_inicio + duracao;
+
+    for (const auto& res : reservas) {
+        //checa apenas reservas para a mesma sala na mesma data
+        if (res.getId() == salaId && res.getData() == data) {
+            
+            int existente_inicio;
+            try {
+                //vonverte o horário da reserva existente para um número
+                existente_inicio = std::stoi(res.getHorario());
+            } catch (...) {
+                //ignora reservas mal formatadas no arquivo .txt
+                continue; 
+            }
+
+            //calcula o período da reserva existente
+            int existente_duracao = res.getDuracao();
+            int existente_fim = existente_inicio + existente_duracao;
+
+            //checagem de sobreposição de intervalo
+            //(InicioA < FimB) E (InicioB < FimA)
+            if (novo_inicio < existente_fim && existente_inicio < novo_fim) {
+                std::cout << "Erro: Conflito de horario! Sala ja reservada de " 
+                          << existente_inicio << ":00 as " << existente_fim << ":00." << std::endl;
+                return false; //CONFLITO! Não está disponível.
+            }
+        }
+    }
+    return true;//nenhum conflito encontrado
 }
 void AdmSalas::listarReservas() const {
     if (reservas.empty()) {

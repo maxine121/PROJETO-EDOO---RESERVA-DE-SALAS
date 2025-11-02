@@ -5,28 +5,35 @@
 #include "headers/admSalas.h"
 #include "headers/admUsuario.h"
 #include "headers/comumUsuario.h"
+#include "headers/gerenciadorUsuariosComuns.h"
+#include <thread>   //necessário para std::this_thread
+#include <chrono>   //necessário para std::chrono::milliseconds
 
 void limparTela() {
 #ifdef _WIN32
     system("cls");
 #else
-    // Assume sistemas POSIX (Linux, macOS)
+    //assume sistemas POSIX (Linux, macOS)
     system("clear");
 #endif
 }
 
+void sleep_ms(){
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+}
+
 int main() {
     AdmSalas adm; //Instancia um objeto da classe AdmSalas com todos os métodos necessários para administrar salas e reservas.
-    ComumUsuario pre_uc("","","");
+    GerenciadorUsuariosComuns pre_uc; // Objeto para gerenciar usuários comuns
     AdmUsuario pre_ua("","","");
 
 
     adm.carregarSalasDeArquivo("salas.txt");
     adm.carregarDoArquivo("reservas.txt");
     pre_ua.carregarUsuariosAdms("usuarios_adms.txt");
-    pre_uc.carregarUsuariosComuns("usuarios_comuns.txt");
+    pre_uc.carregarUsuariosComuns("usuarios_comuns.txt"); // Corrigido: chama no objeto pre_uc
     int escolha;
-    int acesso;
+    int acesso = 0; // Inicializar acesso
     escolha_invalida:
     do {
         limparTela();
@@ -50,15 +57,18 @@ int main() {
                 std::cin >> cpf;
                 std::cout << std::endl;
 
-                if (pre_uc.cpfRepetido(cpf)) {
+                if (pre_uc.cpfRepetido(cpf)) { // Corrigido: chama em pre_uc
                     std::cout << "Esse cpf ja esta cadastrado a outra conta." << std::endl;
+                    sleep_ms();
                     goto escolha_invalida;
                 }
-                if (!pre_uc.login(nome, senha, cpf)) {
-                    ComumUsuario u(nome, senha, cpf);
+                if (!pre_uc.login(nome, senha, cpf)) { // Corrigido: chama em pre_uc
+                    
+                    ComumUsuario u(nome, senha, cpf); // Corrigido: 'u' é um ComumUsuario
                     acesso = u.getAcessoNivel();
-                    u.addUsuario(u);
-                    u.salvarUsuariosComuns("usuarios_comuns.txt");
+                    
+                    pre_uc.addUsuario(u); // Corrigido: 'pre_uc' adiciona o usuário
+                    pre_uc.salvarUsuariosComuns("usuarios_comuns.txt"); // Corrigido: 'pre_uc' salva
 
                     std::cout << "Usuario adicionado com sucesso" << std::endl;
                 }
@@ -74,11 +84,13 @@ int main() {
                 std::cin >> cpf;
                 std::cout << std::endl;
                 if (pre_uc.login(nome, senha, cpf)) {
+                    
                     ComumUsuario u(nome, senha, cpf);
-                    acesso = u.getAcessoNivel();
-                    u.addUsuario(u);
+                    acesso = u.getAcessoNivel(); // Corrigido: pegando o nível de acesso no login
+                    //removido bug lógico: u.addUsuario(u); (Não se adiciona usuário no login)
                 } else {
                     std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
+                    sleep_ms();
                     goto escolha_invalida;
                 }
 
@@ -95,6 +107,11 @@ int main() {
                 if (pre_ua.login(nome, senha, cpf)) {
                     AdmUsuario u(nome, senha, cpf);
                     acesso = u.getAcessoNivel();
+                } else {
+                    // Adicionado feedback para login de admin falho
+                    std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
+                    sleep_ms();
+                    goto escolha_invalida;
                 }
             }break;
             case 4: {
@@ -102,6 +119,8 @@ int main() {
                 }
                 default:
                 std::cout << "Escolha invalida, tente outra vez.\n";
+                sleep_ms();
+
             }
         }   while (escolha != 1 && escolha != 2 && escolha != 3);
 
@@ -141,11 +160,12 @@ int main() {
                 std::getline(std::cin, reservadoPor);
 
 
-                Reserva r(id, data, horario, reservadoPor, duracao); // Instancia um obj da classe Reserva.
+                Reserva r(id, data, horario, reservadoPor, duracao); //Instancia um obj da classe Reserva.
 
 
                 if (adm.addReserva(r)) { //Tenta adicioná-lo ao vetor reservas caso não seja igual a outro.
                     std::cout << "Reserva adicionada com sucesso.\n";
+                    adm.salvarNoArquivo("reservas.txt");
                 }
             }
                 break;
@@ -153,7 +173,7 @@ int main() {
                 adm.listarReservas();
                 break;
             case 3: {
-                if (acesso == 2) {
+                if (acesso == 2) { // Acesso de Admin
 
                     int id;
                     std::string data, horario;
@@ -169,6 +189,7 @@ int main() {
 
                     if (adm.cancelarReserva(id, data, horario)) {
                         std::cout << "Reserva cancelada.\n";
+                        adm.salvarNoArquivo("reservas.txt");
                     } else {
                         std::cout << "Sala ou horario não encontrado(s).\n";
                     }
@@ -177,8 +198,9 @@ int main() {
                     std::cout<<"Acesso negado" << std::endl;
                 }
             }
+            break; // Adicionado break faltando
             case 4: {
-                if (acesso == 2){
+                if (acesso == 2){ // Acesso de Admin
                     int id;
                     std::string nome;
 
@@ -194,8 +216,11 @@ int main() {
 
                         Sala novaSala(id, nome);
                         adm.addSala(novaSala);
+                        adm.salvarSalasEmArquivo("salas.txt");
                         std::cout << "Sala adicionada com sucesso. \n";
                     }
+                } else {
+                    std::cout<<"Acesso negado" << std::endl;
                 }
             }
                 break;

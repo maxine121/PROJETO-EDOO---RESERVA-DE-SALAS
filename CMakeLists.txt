@@ -15,4 +15,6 @@ add_executable(PROJETO-EDOO---RESERVA-DE-SALAS main.cpp
         src/admUsuario.cpp
         headers/admUsuario.h
         src/comumUsuario.cpp
-        headers/comumUsuario.h)
+        headers/comumUsuario.h
+        src/gerenciadorUsuariosComuns.cpp
+        headers/gerenciadorUsuariosComuns.h)

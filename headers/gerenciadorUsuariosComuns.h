@@ -3,11 +3,11 @@
 
 #include <vector>
 #include <string>
-#include "comumUsuario.h" //precisa saber o que é um ComumUsuario
+#include "comumUsuario.h"
 
 class GerenciadorUsuariosComuns {
 private:
-    std::vector<ComumUsuario> usuariosComuns; //alista fica AQUI
+    std::vector<ComumUsuario> usuariosComuns; //a lista fica AQUI
 
 public:
     //todas as funções de gerenciamento vêm para cá

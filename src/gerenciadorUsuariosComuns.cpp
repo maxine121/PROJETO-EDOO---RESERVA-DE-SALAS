@@ -39,7 +39,6 @@ void GerenciadorUsuariosComuns::carregarUsuariosComuns(const std::string& filena
         std::getline(ss, cpf, '|');
 
         // Adiciona ao vetor DO GERENCIADOR
-        // Vamos usar emplace_back que é mais eficiente e corrige o erro da sua imagem
         usuariosComuns.emplace_back(nome, senha, cpf);
         
         // DEBUG: Mostrar quem foi carregado

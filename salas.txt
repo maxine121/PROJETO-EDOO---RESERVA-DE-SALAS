@@ -1,5 +1,7 @@
-101|grad2
+101|Lab. de Hardware
 102|Anfiteatro
-103|grad5
-104|Lab
-105|205
+103|GRAD 01
+104|GRAD 02
+105|GRAD 03
+106|GRAD 04
+107|GRAD 05

@@ -91,7 +91,7 @@ void AdmSalas::salvarNoArquivo(const std::string& filename) const {
     out.close();
 }
 void AdmSalas::carregarDoArquivo(const std::string& filename) {
-    std::ifstream in(filename);
+    try {std::ifstream in(filename);
     std::string line;
     while (std::getline(in, line)) {
         std::stringstream ss(line);
@@ -109,6 +109,9 @@ void AdmSalas::carregarDoArquivo(const std::string& filename) {
         reservas.push_back(Reserva(id, data, horario, reservadoPor, duracao));
     }
     in.close();
+} catch (...) {
+    return;
+}
 }
 
 void AdmSalas::addSala(const Sala& s) {

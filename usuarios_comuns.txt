@@ -1,4 +1,1 @@
-Alessandro|789|00000000000
-eduardo|456|000
-lucas|741|789
-Jorge|741852|852
+italo|pedra|44

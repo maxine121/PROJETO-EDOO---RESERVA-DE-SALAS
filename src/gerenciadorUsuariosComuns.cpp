@@ -6,6 +6,7 @@
 void GerenciadorUsuariosComuns::addUsuario(const ComumUsuario& uc) {
     usuariosComuns.push_back(uc);
     std::cout << "[DEBUG] Usuário " << uc.getNome() << " adicionado ao vetor em memória." << std::endl;
+    //Aqui mostra que a função de cadastro foi realizada com sucesso;
 }
 
 bool GerenciadorUsuariosComuns::login(const std::string& nomeInserido, const std::string& senhaInserida, const std::string& cpfInserido) {
@@ -13,6 +14,7 @@ bool GerenciadorUsuariosComuns::login(const std::string& nomeInserido, const std
         if (ucm.getSenha() == senhaInserida && ucm.getNome() == nomeInserido && ucm.getCPF() == cpfInserido) {
             return true;
         }
+        //Aqui compara se a senha do usuário está correta;
     }
     return false;
 }
@@ -37,7 +39,7 @@ void GerenciadorUsuariosComuns::carregarUsuariosComuns(const std::string& filena
         std::getline(ss, nome, '|');
         std::getline(ss, senha, '|');
         std::getline(ss, cpf, '|');
-
+        //Adiciona os dados na mesma linha e separados por barra vertical;
         // Adiciona ao vetor DO GERENCIADOR
         usuariosComuns.emplace_back(nome, senha, cpf);
         
@@ -72,7 +74,7 @@ void GerenciadorUsuariosComuns::salvarUsuariosComuns(const std::string& filename
     out.close();
     std::cout << "[DEBUG] Salvamento concluido." << std::endl;
 }
-
+//Aqui compara se o NOME corresponde a algum outro já existente no documento .txt, impedindo que haja duplicação.
 bool GerenciadorUsuariosComuns::nomeExiste(const std::string& nome) {
     for (const auto& ucm : usuariosComuns) {
         if (ucm.getNome() == nome) {
@@ -81,7 +83,7 @@ bool GerenciadorUsuariosComuns::nomeExiste(const std::string& nome) {
     }
     return false;
 }
-
+//Aqui compara se o CPF corresponde a algum outro já existente no documento .txt, impedindo que haja duplicação.
 bool GerenciadorUsuariosComuns::cpfRepetido(const std::string& cpf) const {
     for (const auto& ucm : usuariosComuns) {
         if (ucm.getCPF() == cpf) {

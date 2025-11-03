@@ -8,9 +8,11 @@
 // Removido: #include <vector> (não é mais necessário aqui)
 
 class ComumUsuario : public Usuario {
+    //Aqui define o nível de acesso que um usuário comum possui à biblioteca;
 private:
     int acessoNivel = 1;
 public:
+    //Nesse ponto,
     using Usuario::Usuario;
     int getAcessoNivel() const;
 };

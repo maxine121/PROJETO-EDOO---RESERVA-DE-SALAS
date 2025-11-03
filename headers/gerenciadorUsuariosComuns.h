@@ -1,6 +1,7 @@
 #ifndef PROJETO_EDOO_RESERVA_DE_SALAS_GERENCIADORUSUARIOSCOMUNS_H
 #define PROJETO_EDOO_RESERVA_DE_SALAS_GERENCIADORUSUARIOSCOMUNS_H
 
+//atrelando classes para usuários a fim de armazenar os dados de cada instância deles dentro de um vetor
 #include <vector>
 #include <string>
 #include "comumUsuario.h"

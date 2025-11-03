@@ -7,7 +7,7 @@
 #include "headers/gerenciadorUsuariosComuns.h"
 
 
-
+//Arquivo principal do projeto;
 int main() {
     AdmSalas adm; //Instancia um objeto da classe AdmSalas com todos os métodos necessários para administrar salas e reservas.
     GerenciadorUsuariosComuns pre_uc; // Objeto para gerenciar usuários comuns
@@ -21,6 +21,7 @@ int main() {
     int escolha;
     int acesso = 0; // Inicializar acesso
     do {
+        //Mensagem inicial da biblioteca;
         std::cout << "\n--- Sistema de Reservas do CIN ---\n"
         << "Boas vindas, o que deseja fazer?\n"
         << "1. Criar Usuario comum\n"
@@ -33,6 +34,7 @@ int main() {
             std::cin.clear();
             std::cin.ignore(100, '\n');
             escolha = 9;
+            // Caso seja digitado uma string, ou algo diferente de um número inteiro, ele limpa o que foi digitado e não armazena;
         }
         std::cin.ignore(100, '\n');
         switch (escolha) {
@@ -103,11 +105,13 @@ int main() {
                     return 0;
                 }
             default:
+                //Aqui ele volta ao loop quando a escolha for diferente de 1, 2 e 3;
                 std::cout << "Escolha invalida, tente outra vez.\n";
             }
         }   while (escolha != 1 && escolha != 2 && escolha != 3);
 
     do {
+        //Acesso às salas disponíveis no momento;
         std::cout << "\n--- Sistema de Reservas do CIN ---\n";
         std::cout << "Essas sao as salas atualmente disponiveis:\n";
         adm.listarSalas();
@@ -129,6 +133,7 @@ int main() {
                 int id, duracao;
 
                 std::string data, horario, reservadoPor;
+                //informações necessárias de reserva de sala;
 
                 std::cout << "Digite o id da sala: ";
                 std::cin >> id;
@@ -195,6 +200,7 @@ int main() {
                     std::cin >> id;
 
                     if (adm.salaExiste(id)){
+                        //Essa condição impede que exista uma sala com ID repetido;
                         std::cout << "Erro: Ja existe uma sala com este ID.\n";
                     }else{
                         std::cin.ignore(); //limpa o buffer

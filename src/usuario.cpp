@@ -1,7 +1,7 @@
 //
 // Created by italo on 25/10/2025.
 //
-
+// Definição de cada componente inerente ao usuário;
 #include "../headers/usuario.h"
 Usuario::Usuario(const std::string &nome, const std::string &senha, const std::string &cpf )
     : Nome(nome), Senha(senha), Cpf(cpf) {}

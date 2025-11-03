@@ -8,11 +8,13 @@
 
 
 class Usuario {
+    //Aqui em protected as informações são acessadas pela mesma classe ou por classes derivadas
 protected:
     std::string Nome;
     std::string Senha;
     std::string Cpf;
 public:
+    // Declaração de informações de nome, senha e cpf dos usuários;
     Usuario(const std::string &nome, const std::string &senha, const std::string &cpf );
     [[nodiscard]] std::string getNome() const;
     [[nodiscard]] std::string getSenha() const;

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 
+//Aqui dá a oportunidade de criar mais um usuário no banco de dados, especificamente no arquivo .txt
 void AdmUsuario::addUsuario(const AdmUsuario& ua) {
     usuariosAdms.push_back(ua);
 }
@@ -16,6 +17,7 @@ bool AdmUsuario::login(const std::string& nomeInserido, const std::string& senha
             return true;
         }
     }
+    // Conferir se a senha do usuário administrador está correta para fazer login e entrar
     return false;
 };
 
@@ -29,7 +31,7 @@ void AdmUsuario::carregarUsuariosAdms(const std::string& filename) {
         std::getline(ss, nome, '|');
         std::getline(ss, senha, '|');
         std::getline(ss, cpf, '|');
-
+        //Mais uma vez dividimos as informações de nome, senha e cpf entre barras verticais
         usuariosAdms.push_back(AdmUsuario(nome, senha, cpf));
     }
     in.close();
@@ -41,6 +43,7 @@ bool AdmUsuario::nomeExiste(const std::string& nome) {
         if (uadm.getNome() == nome) {
             return true;
         }
+        //Conferir se um determinado nome já existe no arquivo .txt de armazenamento de dados;
     }
     return false;
 }
@@ -49,9 +52,11 @@ bool AdmUsuario::cpfRepetido(const std::string& cpf) {
         if (uadm.getCPF() == cpf) {
             return true;
         }
+        //Não podem haver duas pessoas com mesmo cpf;
     }
     return false;
 }
 int AdmUsuario::getAcessoNivel() const {
+    //Dá a permissão de visualizar o nível de cada usuário;
     return acessoNivel;
 }

@@ -3,12 +3,13 @@
 //
 
 #include "../headers/reserva.h"
-
+//Aqui constam todos os dados necessários para reservar salas, como ID, responsável, data, horário e duração;
 Reserva::Reserva(const int id, const std::string &data, const std::string &horario, const std::string &reservadoPor, const int duracao)
     : salaId(id), ReservadoPor(reservadoPor), Data(data), Horario(horario), Duracao(duracao) {}
     int Reserva::getId() const {
     return salaId;
 }
+//Aqui define dados de reserva de sala, como ID, duração e data;
     std::string Reserva::getData() const {
         return Data;
     }

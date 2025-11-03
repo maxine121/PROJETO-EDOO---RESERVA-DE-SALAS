@@ -8,12 +8,14 @@
 
 #include "reserva.h"
 #include "sala.h"
-
 class AdmSalas {
+//Aqui é uma classe particular, com funcões que apenas administradores podem ter acesso;
 private:
-    std::vector<Sala> salas;
+    std::vector<Sala> salas; //Vetores para salvar as diferentes salas e reservas;
     std::vector<Reserva> reservas;
     public:
+    // Aqui podem haver funcionaliades e mudanças nas variáveis;
+    //Essa classe, que é uma classe de negócios, tem o intuito de gerenciar o funcionamento do sistema
     bool addReserva(const Reserva& r);
     bool isDisponivel(int salaId, const std::string& data, const std::string& horario, int duracao) const;
     void listarReservas() const;

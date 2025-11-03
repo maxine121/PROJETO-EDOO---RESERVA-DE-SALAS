@@ -1,0 +1,1 @@
+Criamos um sistema de reservas de salas baseado em linguagem C++. O programa utiliza códigos com diferentes funcionalidades, como os arquivos CPP, os HEADERS e os arquivos .txt. Nosso objetivo nesse projeto foi melhorar a experiência do usuário quanto ao acesso de um sistema simples, prático e intuitivo para reservar salas de modo eficiente na universidade.

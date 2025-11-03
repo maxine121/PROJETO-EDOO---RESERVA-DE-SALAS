@@ -26,10 +26,15 @@ int main() {
         << "1. Criar Usuario comum\n"
         << "2. Entrar como usuario comum\n"
         << "3. Entrar como administrador\n"
-        << "4. Sair\n"
-        << "Digite sua escolha: ";
+        << "4. Sair\n";
+        std::cout << "Digite sua escolha: ";
         std::cin >> escolha;
-
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(100, '\n');
+            escolha = 9;
+        }
+        std::cin.ignore(100, '\n');
         switch (escolha) {
             case 1: {
                 std::string nome, senha, cpf;
@@ -97,9 +102,8 @@ int main() {
             case 4: {
                     return 0;
                 }
-                default:
+            default:
                 std::cout << "Escolha invalida, tente outra vez.\n";
-
             }
         }   while (escolha != 1 && escolha != 2 && escolha != 3);
 
@@ -114,7 +118,12 @@ int main() {
         std::cout << "5. Sair e salvar\n";
         std::cout << "Digite sua escolha: ";
         std::cin >> escolha;
-
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(100, '\n');
+            escolha = 9;
+        }
+        std::cin.ignore(100, '\n');
         switch (escolha) {
             case 1: {
                 int id, duracao;
@@ -124,7 +133,7 @@ int main() {
                 std::cout << "Digite o id da sala: ";
                 std::cin >> id;
 
-                std::cout << "Digite a data quando deseja reservar (Ano-Mes-Dia): ";
+                std::cout << "Digite a data quando deseja reservar (Dia-Mes-Ano): ";
                 std::cin >> data;
 
                 std::cout << "Digite o horario de inicio de reserva (ex.: 14): ";
@@ -189,7 +198,7 @@ int main() {
                         std::cout << "Erro: Ja existe uma sala com este ID.\n";
                     }else{
                         std::cin.ignore(); //limpa o buffer
-                        std::cout << "Digite o numero da nova sala: ";
+                        std::cout << "Digite o nome da nova sala: ";
                         std::getline(std::cin, nome);
 
                         Sala novaSala(id, nome);

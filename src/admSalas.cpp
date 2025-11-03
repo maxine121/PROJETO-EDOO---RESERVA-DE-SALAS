@@ -34,7 +34,7 @@ bool AdmSalas::isDisponivel(int salaId, const std::string& data, const std::stri
             
             int existente_inicio;
             try {
-                //vonverte o horário da reserva existente para um número
+                //converte o horário da reserva existente para um número
                 existente_inicio = std::stoi(res.getHorario());
             } catch (...) {
                 //ignora reservas mal formatadas no arquivo .txt

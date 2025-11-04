@@ -22,6 +22,7 @@ public:
     void setNome(const std::string &nome);
     void setSenha(const std::string &senha);
     void setCPF(const std::string &cpf);
+    std::string printNome() const;
 };
 
 

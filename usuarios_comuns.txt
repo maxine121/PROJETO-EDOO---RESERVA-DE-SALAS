@@ -1,2 +1,3 @@
-italo|pedra|44
-joao|123|123
+italo|pedra|44429015362
+joao|papel|12345678912
+vitor|tesoura|12032179354

@@ -57,6 +57,7 @@ int main() {
                     pre_uc.salvarUsuariosComuns("usuarios_comuns.txt"); // Corrigido: 'pre_uc' salva
 
                     std::cout << "Usuario adicionado com sucesso" << std::endl;
+                    std::cout << "Entrando como " << u.printNome() << std::endl;
                 } else {
                     std::cout << "O Cpf inserido ja esta em uso por outro usuario." << std::endl;
                     escolha = 9;
@@ -73,10 +74,10 @@ int main() {
                 std::cin >> cpf;
                 std::cout << std::endl;
                 if (pre_uc.login(nome, senha, cpf)) {
-                    
+
                     ComumUsuario u(nome, senha, cpf);
                     acesso = u.getAcessoNivel(); // Corrigido: pegando o nível de acesso no login
-                    //removido bug lógico: u.addUsuario(u); (Não se adiciona usuário no login)
+                    std::cout << "Login feito como " << u.printNome() << std::endl;
                 } else {
                     std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
                     escolha = 9;
@@ -95,6 +96,7 @@ int main() {
                 if (pre_ua.login(nome, senha, cpf)) {
                     AdmUsuario u(nome, senha, cpf);
                     acesso = u.getAcessoNivel();
+                    std::cout << "Login feito como " << u.printNome() << std::endl;
                 } else {
                     // Adicionado feedback para login de admin falho
                     std::cout << "Credenciais invalidas. Tente novamente." << std::endl;
@@ -156,7 +158,7 @@ int main() {
 
 
                 if (adm.addReserva(r)) { //Tenta adicioná-lo ao vetor reservas caso não seja igual a outro.
-                    std::cout << "Reserva adicionada com sucesso.\n";
+                    std::cout << "Reserva adicionada com sucesso\n";
                     adm.salvarNoArquivo("reservas.txt");
                 }
             }

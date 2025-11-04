@@ -20,6 +20,7 @@ public:
     bool nomeExiste(const std::string& nome);
     bool cpfRepetido(const std::string& cpf);
     int getAcessoNivel() const;
+    std::string printNome() const;
 };
 
 

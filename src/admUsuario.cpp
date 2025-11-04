@@ -60,3 +60,6 @@ int AdmUsuario::getAcessoNivel() const {
     //Dá a permissão de visualizar o nível de cada usuário;
     return acessoNivel;
 }
+std::string AdmUsuario::printNome() const {
+    return Nome + " (administrador).";
+}

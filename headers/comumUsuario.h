@@ -15,6 +15,7 @@ public:
     //Nesse ponto,
     using Usuario::Usuario;
     int getAcessoNivel() const;
+    std::string printNome() const;
 };
 
 #endif //PROJETO_EDOO_RESERVA_DE_SALAS_COMUMUSUARIO_H

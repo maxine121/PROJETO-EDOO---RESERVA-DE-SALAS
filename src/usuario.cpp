@@ -29,3 +29,6 @@ void Usuario::setSenha(const std::string &senha) {
 void Usuario::setCPF(const std::string &cpf) {
     Cpf = cpf;
 }
+std::string Usuario::printNome() const {
+    return Nome;
+}
